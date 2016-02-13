@@ -56,4 +56,13 @@ public class StringCalculatorTest {
 
         assertEquals(1 + 234 + 55 + 5, result);
     }
+
+    @Test
+    public void useACustomDelimiter_returnSum() throws Exception {
+        String numbersWithCustomDelimiter = "//y\n234y55,27";
+        int result = calculator.add(numbersWithCustomDelimiter);
+
+        assertEquals(234 + 55 + 27, result);
+    }
+
 }
