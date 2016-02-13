@@ -34,4 +34,14 @@ public class StringCalculatorTest {
 
         assertEquals(1, result);
     }
+
+    @Test
+    public void twoNumbers_returnSum() throws Exception {
+        String numbers = "1,2";
+        int result = calculator.add(numbers);
+
+        assertEquals(1 + 2, result);
+    }
+
+
 }
