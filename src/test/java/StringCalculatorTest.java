@@ -36,12 +36,24 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void twoNumbers_returnSum() throws Exception {
-        String numbers = "1,2";
+    public void multipleNumbers_returnSum() throws Exception {
+        String numbers = "1,2,65645,6";
         int result = calculator.add(numbers);
 
-        assertEquals(1 + 2, result);
+        assertEquals(1 + 2 + 65645 + 6, result);
     }
 
+    @Test (expected = NumberStringFormatException.class)
+    public void wrongFormattedString_throwException() throws Exception {
+        String wrongFormat = "1,2345,aa,4";
+        calculator.add(wrongFormat);
+    }
 
+    @Test
+    public void testAcceptNewLineAsWellAsComma() throws Exception {
+        String numbersWithMixedDelimiters = "1,234\n55,5";
+        int result = calculator.add(numbersWithMixedDelimiters);
+
+        assertEquals(1 + 234 + 55 + 5, result);
+    }
 }
