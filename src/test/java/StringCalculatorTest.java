@@ -48,4 +48,12 @@ public class StringCalculatorTest {
         String wrongFormat = "23,ff,56,5";
         calculator.add(wrongFormat);
     }
+
+    @Test
+    public void newLineDelimiter_returnsSum() throws Exception {
+        String multipleDelimiters = "33,65\n67\n12,45";
+        int result = calculator.add(multipleDelimiters);
+
+        assertEquals(33 + 65 + 67 + 12 + 45, result);
+    }
 }

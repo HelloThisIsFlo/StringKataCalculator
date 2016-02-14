@@ -13,12 +13,16 @@ public class StringCalculator {
     }
 
     private List<Integer> parseNumbers(String numbersString) throws NumberStringFormatException {
-        String[] fragments = numbersString.split(",");
+        String[] fragments = numbersString.split(makeSplitRegex());
         List<Integer> numbers = new ArrayList<>(fragments.length);
         for (String fragment: fragments) {
             numbers.add(parseInt(fragment));
         }
         return numbers;
+    }
+
+    private String makeSplitRegex() {
+        return "[,\\n]";
     }
 
     private int parseInt(String toParse) throws NumberStringFormatException {
