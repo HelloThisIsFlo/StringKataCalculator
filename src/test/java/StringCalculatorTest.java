@@ -13,7 +13,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void emptyString_returnsZero() throws Exception {
+    public void emptyString_returnZero() throws Exception {
         String empty = "";
         int result = calculator.add(empty);
 
@@ -21,14 +21,14 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void nullString_returnsZero() throws Exception {
+    public void nullString_returnZero() throws Exception {
         int result = calculator.add(null);
 
         assertEquals(0, result);
     }
 
     @Test
-    public void singleNumber_returnsNumber() throws Exception {
+    public void singleNumber_returnNumber() throws Exception {
         String singleNumber = "3";
         int result = calculator.add(singleNumber);
 
@@ -36,7 +36,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void multipleNumbersSeparatedComa_returnsSum() throws Exception {
+    public void multipleNumbersSeparatedComa_returnSum() throws Exception {
         String numbers = "23,44,5,1";
         int result = calculator.add(numbers);
 
@@ -50,10 +50,18 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void newLineDelimiter_returnsSum() throws Exception {
+    public void newLineDelimiter_returnSum() throws Exception {
         String multipleDelimiters = "33,65\n67\n12,45";
         int result = calculator.add(multipleDelimiters);
 
         assertEquals(33 + 65 + 67 + 12 + 45, result);
+    }
+
+    @Test
+    public void customDelimiter_returnSum() throws Exception {
+        String numbersWithCustomDelimiter = "//d\n34d55d23\n12d99";
+        int result = calculator.add(numbersWithCustomDelimiter);
+
+        assertEquals(34 + 55 + 23 + 12 + 99, result);
     }
 }

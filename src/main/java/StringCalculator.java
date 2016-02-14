@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +9,33 @@ public class StringCalculator {
         if (numbersString == null || numbersString.isEmpty()) {
             return 0;
         } else {
-            List<Integer> numbers = parseNumbers(numbersString);
-            return makeSum(numbers);
+            return addStringNotNull(numbersString);
         }
     }
 
-    private List<Integer> parseNumbers(String numbersString) throws NumberStringFormatException {
-        String[] fragments = numbersString.split(makeSplitRegex());
+    private int addStringNotNull(String numbersString) throws NumberStringFormatException{
+        NumberString delimiterAndNumbers = separateNumbersAndDelimiter(numbersString);
+        List<Integer> numbers = parseNumbers(delimiterAndNumbers);
+        return makeSum(numbers);
+    }
+
+    private NumberString separateNumbersAndDelimiter(String numbersString) {
+        if (hasDelimiter(numbersString)) {
+            int endOfDelimiterIndex = 4;
+            String delimiter = numbersString.substring(0, endOfDelimiterIndex);
+            String numbers = numbersString.substring(endOfDelimiterIndex);
+            return new NumberString(delimiter, numbers);
+        } else {
+            return new NumberString("", numbersString);
+        }
+    }
+
+    private boolean hasDelimiter(String numbersString) {
+        return numbersString.startsWith("//");
+    }
+
+    private List<Integer> parseNumbers(NumberString numberString) throws NumberStringFormatException {
+        String[] fragments = numberString.numbers.split(makeSplitRegex(numberString.delimiter));
         List<Integer> numbers = new ArrayList<>(fragments.length);
         for (String fragment: fragments) {
             numbers.add(parseInt(fragment));
@@ -21,8 +43,8 @@ public class StringCalculator {
         return numbers;
     }
 
-    private String makeSplitRegex() {
-        return "[,\\n]";
+    private String makeSplitRegex(String customDelimiter) {
+        return "[," + customDelimiter + "\\n]";
     }
 
     private int parseInt(String toParse) throws NumberStringFormatException {
@@ -39,6 +61,16 @@ public class StringCalculator {
             result += i;
         }
         return result;
+    }
+
+    private static class NumberString {
+        public final String delimiter;
+        public final String numbers;
+
+        public NumberString(String delimiter, String numbers) {
+            this.delimiter = delimiter;
+            this.numbers = numbers;
+        }
     }
 
 
