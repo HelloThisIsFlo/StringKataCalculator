@@ -26,4 +26,12 @@ public class StringCalculatorTest {
 
         assertEquals(0, result);
     }
+
+    @Test
+    public void singleNumber_returnsNumber() throws Exception {
+        String singleNumber = "3";
+        int result = calculator.add(singleNumber);
+
+        assertEquals(3, result);
+    }
 }
