@@ -2,7 +2,11 @@ public class StringCalculator {
 
 
     public int add(String numbersString) {
-        return 0;
+        if (numbersString == null || numbersString.isEmpty()) {
+            return 0;
+        } else {
+            return 0;
+        }
     }
 
 

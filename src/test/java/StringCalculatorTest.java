@@ -19,4 +19,11 @@ public class StringCalculatorTest {
 
         assertEquals(0, result);
     }
+
+    @Test
+    public void nullString_returnsZero() throws Exception {
+        int result = calculator.add(null);
+
+        assertEquals(0, result);
+    }
 }
