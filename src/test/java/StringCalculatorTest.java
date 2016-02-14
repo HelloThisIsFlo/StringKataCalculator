@@ -34,4 +34,12 @@ public class StringCalculatorTest {
 
         assertEquals(3, result);
     }
+
+    @Test
+    public void multipleNumbersSeparatedComa_returnsSum() throws Exception {
+        String numbers = "23,44,5,1";
+        int result = calculator.add(numbers);
+
+        assertEquals(23 + 44 + 5 + 1, result);
+    }
 }
