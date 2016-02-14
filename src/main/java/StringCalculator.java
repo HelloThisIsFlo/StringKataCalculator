@@ -3,8 +3,7 @@ import java.util.List;
 
 public class StringCalculator {
 
-
-    public int add(String numbersString) {
+    public int add(String numbersString) throws NumberStringFormatException {
         if (numbersString == null || numbersString.isEmpty()) {
             return 0;
         } else {
@@ -13,13 +12,21 @@ public class StringCalculator {
         }
     }
 
-    private List<Integer> parseNumbers(String numbersString) {
+    private List<Integer> parseNumbers(String numbersString) throws NumberStringFormatException {
         String[] fragments = numbersString.split(",");
         List<Integer> numbers = new ArrayList<>(fragments.length);
         for (String fragment: fragments) {
-            numbers.add(Integer.parseInt(fragment));
+            numbers.add(parseInt(fragment));
         }
         return numbers;
+    }
+
+    private int parseInt(String toParse) throws NumberStringFormatException {
+        try {
+            return Integer.parseInt(toParse);
+        } catch (NumberFormatException e) {
+            throw new NumberStringFormatException(e);
+        }
     }
 
     private int makeSum(List<Integer> numbers) {

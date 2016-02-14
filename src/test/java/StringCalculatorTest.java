@@ -42,4 +42,10 @@ public class StringCalculatorTest {
 
         assertEquals(23 + 44 + 5 + 1, result);
     }
+
+    @Test (expected = NumberStringFormatException.class)
+    public void formatError_throwException() throws Exception {
+        String wrongFormat = "23,ff,56,5";
+        calculator.add(wrongFormat);
+    }
 }
