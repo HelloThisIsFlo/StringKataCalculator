@@ -12,5 +12,11 @@ public class StringCalculatorTest {
         calculator = new StringCalculator();
     }
 
+    @Test
+    public void emptyString_returnsZero() throws Exception {
+        String empty = "";
+        int result = calculator.add(empty);
 
+        assertEquals(0, result);
+    }
 }
