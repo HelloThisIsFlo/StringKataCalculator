@@ -13,13 +13,9 @@ public class StringCalculator {
     }
 
     private int add_operationNotEmpty(String operation) {
-        String[] fragments = operation.split(",");
-        List<Integer> parsedInts = new ArrayList<>(fragments.length);
-        for (String fragment: fragments) {
-            parsedInts.add(Integer.parseInt(fragment));
-        }
-
-        return makeSum(parsedInts);
+        NumberString numberString = new NumberString(operation);
+        List<Integer> numbers = numberString.getParsedNumbers();
+        return makeSum(numbers);
     }
 
     private int makeSum(List<Integer> numbers) {
