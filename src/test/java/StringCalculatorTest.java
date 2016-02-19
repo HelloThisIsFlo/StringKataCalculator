@@ -58,4 +58,10 @@ public class StringCalculatorTest {
         int result = calculator.add(withCustomDelimiter);
         assertEquals(23 + 55 + 11, result);
     }
+
+    @Test (expected = NegativeNumberNotAllowed.class)
+    public void negativeNumber_throwException() throws Exception {
+        String withNegativeNumber = "45,-1,33";
+        calculator.add(withNegativeNumber);
+    }
 }
