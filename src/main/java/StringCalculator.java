@@ -2,6 +2,7 @@ import java.util.List;
 
 public class StringCalculator {
 
+    private List<Integer> currentNumbers;
 
     public int add(String operation) throws OperationFormatException, NegativeNumberNotAllowed {
         if (operation == null || operation.isEmpty()) {
@@ -13,22 +14,22 @@ public class StringCalculator {
 
     private int add_operationNotEmpty(String operation) throws OperationFormatException, NegativeNumberNotAllowed {
         OperationParser operationParser = new OperationParser(operation);
-        List<Integer> numbers = operationParser.getParsedNumbers();
-        return makeSum(numbers);
+        currentNumbers = operationParser.getParsedNumbers();
+        return makeSum();
     }
 
-    private int makeSum(List<Integer> numbers) throws NegativeNumberNotAllowed {
+    private int makeSum() throws NegativeNumberNotAllowed {
+        List<Integer> curatedNumbers = curateNumbers();
         int result = 0;
-        for (int i: numbers) {
-            checkIfNotNegative(i);
-            result += i;
+        for (int i: curatedNumbers) {
+                result += i;
         }
         return result;
     }
 
-    private void checkIfNotNegative(int i) throws NegativeNumberNotAllowed {
-        if (i < 0) {
-            throw new NegativeNumberNotAllowed();
-        }
+    private List<Integer> curateNumbers() throws NegativeNumberNotAllowed {
+        NumberCurator curator = new NumberCurator(currentNumbers);
+        curator.validate();
+        return curator.getCuratedNumbers();
     }
 }

@@ -34,9 +34,9 @@ public class StringCalculatorTest {
 
     @Test
     public void multipleNumberSeparaterComa_returnSum() throws Exception {
-        String multipleNumbersComa = "324,4554,12";
+        String multipleNumbersComa = "324,554,12";
         int result = calculator.add(multipleNumbersComa);
-        assertEquals(324 + 4554 + 12, result);
+        assertEquals(324 + 554 + 12, result);
     }
 
     @Test (expected = OperationFormatException.class)
@@ -63,5 +63,12 @@ public class StringCalculatorTest {
     public void negativeNumber_throwException() throws Exception {
         String withNegativeNumber = "45,-1,33";
         calculator.add(withNegativeNumber);
+    }
+
+    @Test
+    public void numberBiggerThan1000_ignoreThem() throws Exception {
+        String bigNumbers = "24,65,6647,999";
+        int result = calculator.add(bigNumbers);
+        assertEquals(24 + 65 + 999, result);
     }
 }
