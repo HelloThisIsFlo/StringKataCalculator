@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class StringCalculator {
 
 
-    public int add(String operation) {
+    public int add(String operation) throws OperationFormatException {
         if (operation == null || operation.isEmpty()) {
             return 0;
         } else {
@@ -12,9 +11,9 @@ public class StringCalculator {
         }
     }
 
-    private int add_operationNotEmpty(String operation) {
-        NumberString numberString = new NumberString(operation);
-        List<Integer> numbers = numberString.getParsedNumbers();
+    private int add_operationNotEmpty(String operation) throws OperationFormatException {
+        OperationParser operationParser = new OperationParser(operation);
+        List<Integer> numbers = operationParser.getParsedNumbers();
         return makeSum(numbers);
     }
 

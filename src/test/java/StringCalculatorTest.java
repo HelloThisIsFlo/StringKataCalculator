@@ -38,4 +38,10 @@ public class StringCalculatorTest {
         int result = calculator.add(multipleNumbersComa);
         assertEquals(324 + 4554 + 12, result);
     }
+
+    @Test (expected = OperationFormatException.class)
+    public void wrongFormat_throwException() throws Exception {
+        String wrongFormat = "34,ss,54";
+        calculator.add(wrongFormat);
+    }
 }
